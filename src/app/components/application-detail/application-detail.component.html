@@ -1,0 +1,34 @@
+@if (loading()) {
+  <div class="loading">Loading...</div>
+} @else {
+  @let app = application();
+  <div class="detail-card">
+    <div class="detail-header">
+      <div>
+        <h1>{{ app.company }}</h1>
+        <p class="position">{{ app.position }}</p>
+      </div>
+      <span class="status-badge" [class]="'status-' + app.status.toLowerCase()">{{ app.status }}</span>
+    </div>
+    <dl class="detail-fields">
+      <dt>Applied Date</dt>
+      <dd>{{ app.appliedDate }}</dd>
+      @if (app.salary) {
+        <dt>Salary</dt>
+        <dd>{{ app.salary }}</dd>
+      }
+      @if (app.jobUrl) {
+        <dt>Job URL</dt>
+        <dd><a [href]="app.jobUrl" target="_blank" rel="noopener">{{ app.jobUrl }}</a></dd>
+      }
+      @if (app.notes) {
+        <dt>Notes</dt>
+        <dd>{{ app.notes }}</dd>
+      }
+    </dl>
+    <div class="detail-actions">
+      <a [routerLink]="['/applications', app.id, 'edit']" class="btn-primary">Edit</a>
+      <button type="button" class="btn-danger" (click)="deleteRequested.emit(app.id)">Delete</button>
+    </div>
+  </div>
+}
