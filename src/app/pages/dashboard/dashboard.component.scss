@@ -1,0 +1,23 @@
+.page-title {
+  margin: 0 0 1rem;
+  font-size: 1.5rem;
+}
+
+.section {
+  h3 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+  }
+
+  .view-all {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #2196f3;
+    text-decoration: none;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
