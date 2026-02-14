@@ -1,0 +1,13 @@
+<div class="layout">
+  <header class="header">
+    <a routerLink="/" class="logo">Job Tracker</a>
+    <nav class="nav">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Dashboard</a>
+      <a routerLink="/applications" routerLinkActive="active">Applications</a>
+      <a routerLink="/applications/new" routerLinkActive="active" class="btn-add">+ Add Application</a>
+    </nav>
+  </header>
+  <main class="main">
+    <router-outlet />
+  </main>
+</div>
