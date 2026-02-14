@@ -20,7 +20,8 @@ export class ApplicationService {
   }
 
   create(application: Omit<JobApplication, 'id'>): Observable<JobApplication> {
-    return this.http.post<JobApplication>(API_URL, application);
+    const { id: _id, ...body } = application as JobApplication;
+    return this.http.post<JobApplication>(API_URL, body);
   }
 
   update(id: string, application: Partial<JobApplication>): Observable<JobApplication | null> {
