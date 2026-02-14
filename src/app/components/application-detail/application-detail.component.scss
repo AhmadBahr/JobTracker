@@ -1,0 +1,104 @@
+.loading {
+  padding: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+.detail-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  max-width: 600px;
+}
+
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+
+  h1 {
+    margin: 0 0 0.25rem;
+    font-size: 1.5rem;
+  }
+
+  .position {
+    margin: 0;
+    color: #666;
+    font-size: 1rem;
+  }
+}
+
+.status-badge {
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  &.status-applied { background: #e3f2fd; color: #1976d2; }
+  &.status-interview { background: #fff3e0; color: #e65100; }
+  &.status-offered { background: #e8f5e9; color: #2e7d32; }
+  &.status-rejected { background: #ffebee; color: #c62828; }
+}
+
+.detail-fields {
+  margin: 0 0 1.5rem;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 0.5rem 1.5rem;
+
+  dt {
+    margin: 0;
+    color: #666;
+    font-size: 0.875rem;
+  }
+
+  dd {
+    margin: 0;
+    font-size: 0.95rem;
+
+    a {
+      color: #2196f3;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.detail-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.btn-primary,
+.btn-danger {
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.btn-primary {
+  background: #2196f3;
+  color: white;
+
+  &:hover {
+    background: #1976d2;
+  }
+}
+
+.btn-danger {
+  background: #ffebee;
+  color: #c62828;
+
+  &:hover {
+    background: #ffcdd2;
+  }
+}
