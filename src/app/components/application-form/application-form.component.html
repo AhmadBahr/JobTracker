@@ -1,0 +1,46 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="form">
+  <div class="form-group">
+    <label for="company">Company *</label>
+    <input id="company" type="text" formControlName="company" />
+    @if (form.get('company')?.invalid && form.get('company')?.touched) {
+      <span class="error">Company is required</span>
+    }
+  </div>
+  <div class="form-group">
+    <label for="position">Position *</label>
+    <input id="position" type="text" formControlName="position" />
+    @if (form.get('position')?.invalid && form.get('position')?.touched) {
+      <span class="error">Position is required</span>
+    }
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="status">Status *</label>
+      <select id="status" formControlName="status">
+        @for (s of statuses; track s) {
+          <option [value]="s">{{ s }}</option>
+        }
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="appliedDate">Applied Date *</label>
+      <input id="appliedDate" type="date" formControlName="appliedDate" />
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="jobUrl">Job URL</label>
+    <input id="jobUrl" type="url" formControlName="jobUrl" placeholder="https://..." />
+  </div>
+  <div class="form-group">
+    <label for="salary">Salary</label>
+    <input id="salary" type="text" formControlName="salary" placeholder="e.g. $100k - $120k" />
+  </div>
+  <div class="form-group">
+    <label for="notes">Notes</label>
+    <textarea id="notes" formControlName="notes" rows="4"></textarea>
+  </div>
+  <div class="form-actions">
+    <button type="button" class="btn-secondary" (click)="onCancel()">Cancel</button>
+    <button type="submit" class="btn-primary" [disabled]="form.invalid">Save</button>
+  </div>
+</form>
