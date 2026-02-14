@@ -1,0 +1,10 @@
+@if (loading()) {
+  <div class="loading">Loading...</div>
+} @else {
+  <h2 class="page-title">{{ isEdit() ? 'Edit Application' : 'Add Application' }}</h2>
+  <app-application-form
+    [application]="application()"
+    (saved)="onSaved($event)"
+    (cancelled)="onCancelled()"
+  />
+}
