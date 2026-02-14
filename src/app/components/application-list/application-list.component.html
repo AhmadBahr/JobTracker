@@ -1,0 +1,21 @@
+@if (loading()) {
+  <div class="loading">Loading applications...</div>
+} @else if (showEmptyState() && applications().length === 0) {
+  <div class="empty-state">
+    <p>No applications yet. Add your first one to get started!</p>
+    <a routerLink="/applications/new" class="btn-primary">Add Application</a>
+  </div>
+} @else {
+  <div class="list">
+    @for (app of applications(); track app.id) {
+      <a [routerLink]="['/applications', app.id]" class="card">
+        <div class="card-main">
+          <h3 class="company">{{ app.company }}</h3>
+          <span class="position">{{ app.position }}</span>
+        </div>
+        <span class="status-badge" [class]="'status-' + app.status.toLowerCase()">{{ app.status }}</span>
+        <span class="date">{{ app.appliedDate }}</span>
+      </a>
+    }
+  </div>
+}
