@@ -62,19 +62,45 @@ sequenceDiagram
 
 ## Tech Stack
 
-- Angular 21 (standalone components)
-- RxJS for async data
-- Reactive Forms with validation
-- In-memory mock data (backend-ready structure)
+- **Frontend**: Angular 21, RxJS, Reactive Forms
+- **Backend**: Java 21, Spring Boot, Spring Data JPA
+- **Database**: PostgreSQL with Hibernate ORM
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+
-- npm
+- Node.js 18+, npm
+- Java 21+
+- PostgreSQL 14+
+- Maven
 
-### Install and Run
+### 1. Database Setup
+
+Create the database and configure credentials:
+
+```sql
+CREATE DATABASE jobtracker;
+```
+
+Copy `backend/src/main/resources/application.properties` or create `application-local.properties` in the same folder with your PostgreSQL settings:
+
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/jobtracker
+spring.datasource.username=your_username
+spring.datasource.password=your_password
+```
+
+### 2. Backend
+
+```bash
+cd backend
+mvn spring-boot:run
+```
+
+API runs at http://localhost:8080.
+
+### 3. Frontend
 
 ```bash
 npm install
@@ -94,32 +120,20 @@ Output is in `dist/`.
 ## Project Structure
 
 ```
-src/app/
-├── models/
-│   └── application.model.ts    # JobApplication interface
-├── services/
-│   └── application.service.ts  # CRUD with mock data
-├── components/
-│   ├── layout/
-│   ├── dashboard-stats/
-│   ├── application-list/
-│   ├── application-detail/
-│   └── application-form/
-├── pages/
-│   ├── dashboard/
-│   ├── application-list-page/
-│   ├── application-form-page/
-│   └── application-detail-page/
-└── app.routes.ts
+job-tracker/
+├── src/app/                    # Angular frontend
+│   ├── models/
+│   ├── services/               # HTTP client → backend API
+│   ├── components/
+│   └── pages/
+└── backend/                    # Spring Boot API
+    └── src/main/java/com/jobtracker/
+        ├── controller/
+        ├── service/
+        ├── repository/
+        ├── entity/
+        └── dto/
 ```
-
-## Future: Java Backend
-
-The service layer is structured so you can:
-
-1. Replace in-memory CRUD with `HttpClient` calls to a Spring Boot REST API
-2. Keep the same `JobApplication` interface (align field names with API)
-3. Add authentication (JWT) and route guards when ready
 
 ## License
 
