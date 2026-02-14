@@ -1,0 +1,30 @@
+<div class="page-header">
+  <h2 class="page-title">Applications</h2>
+  <a routerLink="/applications/new" class="btn-add">+ Add Application</a>
+</div>
+<div class="filters">
+  <input
+    type="text"
+    placeholder="Search company or position..."
+    [value]="searchQuery()"
+    (input)="onSearchChange($any($event.target).value)"
+    class="search-input"
+  />
+  <div class="status-filters">
+    @for (s of statuses; track s) {
+      <button
+        type="button"
+        class="filter-btn"
+        [class.active]="statusFilter() === s"
+        (click)="setStatusFilter(s)"
+      >
+        {{ s }}
+      </button>
+    }
+  </div>
+</div>
+<app-application-list
+  [applications]="filteredApplications()"
+  [showEmptyState]="true"
+  [loading]="loading()"
+/>
