@@ -1,0 +1,71 @@
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: #1a1a2e;
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  text-decoration: none;
+  letter-spacing: -0.02em;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+
+  a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color 0.2s;
+
+    &:hover {
+      color: white;
+    }
+
+    &.active {
+      color: #64b5f6;
+    }
+
+    &.btn-add {
+      padding: 0.5rem 1rem;
+      background: #2196f3;
+      color: white;
+      border-radius: 6px;
+
+      &:hover {
+        background: #1976d2;
+      }
+
+      &.active {
+        background: #1976d2;
+        color: white;
+      }
+    }
+  }
+}
+
+.main {
+  flex: 1;
+  padding: 1.5rem;
+  background: #f5f5f5;
+}
