@@ -1,0 +1,7 @@
+@if (application(); as app) {
+  <app-application-detail
+    [application]="app"
+    [loading]="loading()"
+    (deleteRequested)="onDeleteRequested($event)"
+  />
+}
