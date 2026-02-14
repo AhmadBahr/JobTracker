@@ -1,0 +1,31 @@
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  padding: 1.25rem;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-align: center;
+
+  .stat-count {
+    display: block;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    color: #666;
+  }
+
+  &.stat-applied .stat-count { color: #2196f3; }
+  &.stat-interview .stat-count { color: #ff9800; }
+  &.stat-offered .stat-count { color: #4caf50; }
+  &.stat-rejected .stat-count { color: #f44336; }
+}
