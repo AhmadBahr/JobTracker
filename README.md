@@ -1,6 +1,55 @@
 # Job Application Tracker
 
-A portfolio-ready Angular application for tracking job applications through their lifecycle. Angular frontend with a Java Spring Boot backend using PostgreSQL and Hibernate.
+A portfolio-ready Angular application for tracking job applications through their lifecycle. Built with Angular (standalone components) and a Java/Spring Boot backend with PostgreSQL.
+
+## System Diagram
+
+```mermaid
+flowchart TB
+    subgraph Client["Client Tier"]
+        Browser[Browser]
+        Angular[Angular SPA]
+        Browser --> Angular
+    end
+
+    subgraph API["API Tier"]
+        Controller[JobApplicationController]
+        Service[JobApplicationService]
+        Controller --> Service
+    end
+
+    subgraph Data["Data Tier"]
+        Hibernate[Hibernate ORM]
+        PostgreSQL[(PostgreSQL)]
+        Hibernate --> PostgreSQL
+    end
+
+    Angular -->|HTTP REST /api/applications| Controller
+    Service --> Hibernate
+```
+
+### Request Flow
+
+```mermaid
+sequenceDiagram
+    participant U as User
+    participant A as Angular
+    participant C as Controller
+    participant S as Service
+    participant H as Hibernate
+    participant DB as PostgreSQL
+
+    U->>A: Interact (view/add/edit/delete)
+    A->>C: HTTP Request (GET/POST/PUT/DELETE)
+    C->>S: Business logic
+    S->>H: Persist / Query
+    H->>DB: SQL
+    DB-->>H: Result
+    H-->>S: Entity
+    S-->>C: Response
+    C-->>A: JSON
+    A-->>U: Update UI
+```
 
 ## Features
 
@@ -10,13 +59,13 @@ A portfolio-ready Angular application for tracking job applications through thei
 - **Application detail** – View full details with Edit and Delete
 - **Empty state** – Friendly message when no applications exist
 - **Status badges** – Visual indicators for Applied, Interview, Offered, Rejected
-- **Persistent storage** – PostgreSQL database with Hibernate ORM
 
 ## Tech Stack
 
-- **Frontend**: Angular 21 (standalone components), RxJS, Reactive Forms
-- **Backend**: Java 17, Spring Boot 3.2, Spring Data JPA, Hibernate
-- **Database**: PostgreSQL
+- Angular 21 (standalone components)
+- RxJS for async data
+- Reactive Forms with validation
+- In-memory mock data (backend-ready structure)
 
 ## Getting Started
 
@@ -24,28 +73,8 @@ A portfolio-ready Angular application for tracking job applications through thei
 
 - Node.js 18+
 - npm
-- Java 17+
-- Maven 3.8+
-- PostgreSQL 14+
 
-### 1. Database
-
-Create the database:
-
-```sql
-CREATE DATABASE jobtracker;
-```
-
-### 2. Backend
-
-```bash
-cd backend
-mvn spring-boot:run
-```
-
-API runs at http://localhost:8080
-
-### 3. Frontend
+### Install and Run
 
 ```bash
 npm install
@@ -69,7 +98,7 @@ src/app/
 ├── models/
 │   └── application.model.ts    # JobApplication interface
 ├── services/
-│   └── application.service.ts  # HTTP client for backend API
+│   └── application.service.ts  # CRUD with mock data
 ├── components/
 │   ├── layout/
 │   ├── dashboard-stats/
@@ -84,9 +113,13 @@ src/app/
 └── app.routes.ts
 ```
 
-## Backend
+## Future: Java Backend
 
-The Java backend (`backend/`) provides a REST API. See [backend/README.md](backend/README.md) for setup and configuration.
+The service layer is structured so you can:
+
+1. Replace in-memory CRUD with `HttpClient` calls to a Spring Boot REST API
+2. Keep the same `JobApplication` interface (align field names with API)
+3. Add authentication (JWT) and route guards when ready
 
 ## License
 
