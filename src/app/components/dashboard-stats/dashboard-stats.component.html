@@ -1,0 +1,8 @@
+<div class="stats">
+  @for (stat of stats; track stat.status) {
+    <div class="stat-card" [class]="'stat-' + stat.color">
+      <span class="stat-count">{{ stat.count }}</span>
+      <span class="stat-label">{{ stat.label }}</span>
+    </div>
+  }
+</div>
