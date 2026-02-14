@@ -1,44 +1,39 @@
 package com.jobtracker.entity;
 
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import org.hibernate.annotations.GenericGenerator;
-
-import java.time.LocalDate;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import java.util.UUID;
 
 @Entity
 @Table(name = "job_applications")
 public class JobApplication {
 
   @Id
-  @GeneratedValue(generator = "uuid")
-  @GenericGenerator(name = "uuid", strategy = "uuid2")
   private String id;
 
-  @NotBlank
   @Column(nullable = false)
   private String company;
 
-  @NotBlank
   @Column(nullable = false)
   private String position;
 
-  @NotBlank
+  @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private String status; // Applied, Interview, Offered, Rejected
+  private ApplicationStatus status;
 
-  @NotNull
-  @Column(nullable = false)
-  private LocalDate appliedDate;
+  @Column(name = "applied_date", nullable = false)
+  private String appliedDate;
 
   @Column(length = 2000)
   private String notes;
 
-  @Column(length = 500)
+  @Column(name = "job_url")
   private String jobUrl;
 
-  @Column(length = 100)
   private String salary;
 
   public JobApplication() {}
@@ -67,19 +62,19 @@ public class JobApplication {
     this.position = position;
   }
 
-  public String getStatus() {
+  public ApplicationStatus getStatus() {
     return status;
   }
 
-  public void setStatus(String status) {
+  public void setStatus(ApplicationStatus status) {
     this.status = status;
   }
 
-  public LocalDate getAppliedDate() {
+  public String getAppliedDate() {
     return appliedDate;
   }
 
-  public void setAppliedDate(LocalDate appliedDate) {
+  public void setAppliedDate(String appliedDate) {
     this.appliedDate = appliedDate;
   }
 
@@ -105,5 +100,9 @@ public class JobApplication {
 
   public void setSalary(String salary) {
     this.salary = salary;
+  }
+
+  public enum ApplicationStatus {
+    Applied, Interview, Offered, Rejected
   }
 }
