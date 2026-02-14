@@ -1,0 +1,9 @@
+<h2 class="page-title">Dashboard</h2>
+<app-dashboard-stats [counts]="counts()" />
+<article class="section">
+  <h3>Recent Applications</h3>
+  <app-application-list [applications]="recentApplications()" [loading]="loading()" [showEmptyState]="false" />
+  @if (!loading() && recentApplications().length > 0) {
+    <a routerLink="/applications" class="view-all">View all applications</a>
+  }
+</article>
