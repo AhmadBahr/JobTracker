@@ -2,11 +2,10 @@ package com.jobtracker.service;
 
 import com.jobtracker.entity.JobApplication;
 import com.jobtracker.repository.JobApplicationRepository;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.util.List;
 import java.util.Optional;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class JobApplicationService {
@@ -18,7 +17,7 @@ public class JobApplicationService {
   }
 
   public List<JobApplication> findAll() {
-    return repository.findAllByOrderByAppliedDateDesc();
+    return repository.findAll();
   }
 
   public Optional<JobApplication> findById(String id) {
@@ -26,29 +25,27 @@ public class JobApplicationService {
   }
 
   @Transactional
-  public JobApplication create(JobApplication application) {
-    application.setId(null); // Let JPA generate UUID
-    return repository.save(application);
+  public JobApplication create(JobApplication entity) {
+    if (entity.getId() == null || entity.getId().isBlank()) {
+      entity.setId(java.util.UUID.randomUUID().toString());
+    }
+    return repository.save(entity);
   }
 
   @Transactional
-  public Optional<JobApplication> update(String id, JobApplication update) {
-    return repository.findById(id)
-        .map(existing -> {
-          if (update.getCompany() != null) existing.setCompany(update.getCompany());
-          if (update.getPosition() != null) existing.setPosition(update.getPosition());
-          if (update.getStatus() != null) existing.setStatus(update.getStatus());
-          if (update.getAppliedDate() != null) existing.setAppliedDate(update.getAppliedDate());
-          if (update.getNotes() != null) existing.setNotes(update.getNotes());
-          if (update.getJobUrl() != null) existing.setJobUrl(update.getJobUrl());
-          if (update.getSalary() != null) existing.setSalary(update.getSalary());
-          return repository.save(existing);
-        });
+  public Optional<JobApplication> update(String id, JobApplication entity) {
+    if (!repository.existsById(id)) {
+      return Optional.empty();
+    }
+    entity.setId(id);
+    return Optional.of(repository.save(entity));
   }
 
   @Transactional
   public boolean delete(String id) {
-    if (!repository.existsById(id)) return false;
+    if (!repository.existsById(id)) {
+      return false;
+    }
     repository.deleteById(id);
     return true;
   }
