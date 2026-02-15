@@ -1,5 +1,10 @@
 # Job Application Tracker
 
+![Angular](https://img.shields.io/badge/Angular-21-DD0031?style=for-the-badge&logo=angular)
+![Java](https://img.shields.io/badge/Java-21-007396?style=for-the-badge&logo=java)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-14-336791?style=for-the-badge&logo=postgresql)
+![License](https://img.shields.io/badge/License-MIT-000000?style=for-the-badge)
+
 A portfolio-ready Angular application for tracking job applications through their lifecycle. Built with Angular (standalone components) and a Java/Spring Boot backend with PostgreSQL.
 
 ## System Diagram
